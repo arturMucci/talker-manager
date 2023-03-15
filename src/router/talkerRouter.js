@@ -1,9 +1,12 @@
 const { Router } = require('express');
+
 const {
   allTalkers,
   talkerById,
   addNewTalker,
+  editTalkerById,
 } = require('../controller/talkerController');
+
 const {
   validateAuth,
   validateName,
@@ -26,6 +29,17 @@ router.post(
   validateWatchedAt,
   validateRate,
   addNewTalker,
+  );
+
+router.put(
+  '/:id',
+  validateAuth,
+  validateName,
+  validateAge,
+  validateTalk,
+  validateWatchedAt,
+  validateRate,
+  editTalkerById,
   );
 
 router.get('/:id', talkerById);

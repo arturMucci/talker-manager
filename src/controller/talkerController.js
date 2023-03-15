@@ -19,6 +19,22 @@ const addNewTalker = async (req, res) => {
   res.status(HTTP_POSTOK_STATUS).json(newTalker);
 };
 
+const editTalkerById = async (req, res) => {
+  const { id } = req.params;
+  const data = await getAllTalkers();
+  const newTalker = { ...req.body, id: Number(id) };
+  if (data.every((talker) => talker.id !== Number(id))) {
+    return res.status(HTTP_NOTFOUND_STATUS).json({ message: 'Pessoa palestrante não encontrada' });
+  }
+  const newArray = data.filter((talker) => {
+    if (talker.id === id) return newTalker;
+    return talker;
+  });
+  const newData = JSON.stringify([...newArray], null, 2);
+  await fs.writeFile('src/talker.json', JSON.stringify(newData));
+  return res.status(HTTP_OK_STATUS).json(newTalker);
+};
+
 const talkerById = async (req, res) => {
   const { id } = req.params;
   const data = await getTalkerByid(Number(id));
@@ -32,4 +48,5 @@ module.exports = {
   talkerById,
   allTalkers,
   addNewTalker,
+  editTalkerById,
 };
