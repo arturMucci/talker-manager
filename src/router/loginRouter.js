@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const { createToken } = require('../utils');
 const { HTTP_OK_STATUS } = require('../serverStatus');
-const { validateEmail, validatePassword } = require('../middlewares/index');
+const { validateEmail, validatePassword } = require('../middlewares/validation/index');
 
 const router = Router();
 

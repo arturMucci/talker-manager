@@ -1,4 +1,4 @@
-const { HTTP_BADREQUEST_STATUS } = require('../serverStatus');
+const { HTTP_BADREQUEST_STATUS } = require('../../../serverStatus');
 
 const message = {
   blankPassword: { message: 'O campo "password" é obrigatório' },
