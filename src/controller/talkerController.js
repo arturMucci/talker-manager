@@ -26,12 +26,12 @@ const editTalkerById = async (req, res) => {
   if (data.every((talker) => talker.id !== Number(id))) {
     return res.status(HTTP_NOTFOUND_STATUS).json({ message: 'Pessoa palestrante não encontrada' });
   }
-  const newArray = data.filter((talker) => {
-    if (talker.id === id) return newTalker;
+  const newArray = data.map((talker) => {
+    if (talker.id === Number(id)) return newTalker;
     return talker;
   });
-  const newData = JSON.stringify([...newArray], null, 2);
-  await fs.writeFile('src/talker.json', JSON.stringify(newData));
+  const newData = JSON.stringify([id, ...newArray], null, 2);
+  await fs.writeFile('src/talker.json', newData);
   return res.status(HTTP_OK_STATUS).json(newTalker);
 };
 
