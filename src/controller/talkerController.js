@@ -1,9 +1,10 @@
 const fs = require('fs').promises;
 const { getAllTalkers, getTalkerByid } = require('../utils');
 const {
-  HTTP_NOTFOUND_STATUS,
   HTTP_OK_STATUS,
   HTTP_POSTOK_STATUS,
+  HTTP_DELETEOK_STATUS,
+  HTTP_NOTFOUND_STATUS,
 } = require('../serverStatus');
 
 const allTalkers = async (_req, res) => {
@@ -35,6 +36,15 @@ const editTalkerById = async (req, res) => {
   return res.status(HTTP_OK_STATUS).json(newTalker);
 };
 
+const deleteTalkerById = async (req, res) => {
+  const { id } = req.params;
+  const data = await getAllTalkers();
+  const newArray = data.filter((talker) => talker.id !== Number(id));
+  const newData = JSON.stringify(newArray, null, 2);
+  await fs.writeFile('src/talker.json', newData);
+  return res.status(HTTP_DELETEOK_STATUS).json();
+};
+
 const talkerById = async (req, res) => {
   const { id } = req.params;
   const data = await getTalkerByid(Number(id));
@@ -49,4 +59,5 @@ module.exports = {
   allTalkers,
   addNewTalker,
   editTalkerById,
+  deleteTalkerById,
 };

@@ -5,6 +5,7 @@ const {
   talkerById,
   addNewTalker,
   editTalkerById,
+  deleteTalkerById,
 } = require('../controller/talkerController');
 
 const {
@@ -41,6 +42,12 @@ router.put(
   validateRate,
   editTalkerById,
   );
+
+router.delete(
+  '/:id',
+  validateAuth,
+  deleteTalkerById,
+);
 
 router.get('/:id', talkerById);
 
