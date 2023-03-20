@@ -54,10 +54,18 @@ const deleteTalkerById = async (req, res) => {
   return res.status(HTTP_DELETEOK_STATUS).json();
 };
 
+const searchTalkerByName = async (req, res) => {
+  const { q } = req.query;
+  const data = await getAllTalkers();
+  const filteredTalkers = data.filter((talker) => talker.name.includes(q));
+  return res.status(200).json(filteredTalkers);
+};
+
 module.exports = {
   talkerById,
   allTalkers,
   addNewTalker,
   editTalkerById,
   deleteTalkerById,
+  searchTalkerByName,
 };

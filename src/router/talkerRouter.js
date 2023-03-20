@@ -6,6 +6,7 @@ const {
   addNewTalker,
   editTalkerById,
   deleteTalkerById,
+  searchTalkerByName,
 } = require('../controller/talkerController');
 
 const {
@@ -31,6 +32,10 @@ router.post(
   validateRate,
   addNewTalker,
   );
+
+router.get('/search',
+  validateAuth,
+  searchTalkerByName);
 
 router.put(
   '/:id',
