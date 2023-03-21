@@ -6,6 +6,8 @@ const validateAge = require('./validateTalker/validateAge');
 const validateTalk = require('./validateTalker/validateTalk');
 const validateWatchedAt = require('./validateTalker/validateWatchedAt');
 const validateRate = require('./validateTalker/validateRate');
+const validateSearchRate = require('./validateTalker/validateSearchRate');
+const validateSearchDate = require('./validateTalker/validateSearchDate');
 
 module.exports = {
   validateEmail,
@@ -16,4 +18,6 @@ module.exports = {
   validateTalk,
   validateWatchedAt,
   validateRate,
+  validateSearchRate,
+  validateSearchDate,
 };

@@ -55,10 +55,19 @@ const deleteTalkerById = async (req, res) => {
 };
 
 const searchTalkerByName = async (req, res) => {
-  const { q } = req.query;
-  const data = await getAllTalkers();
-  const filteredTalkers = data.filter((talker) => talker.name.includes(q));
-  return res.status(200).json(filteredTalkers);
+  const { q, rate, date } = req.query;
+  let filteredTalkers = await getAllTalkers();
+  if (q) {
+    filteredTalkers = filteredTalkers
+      .filter((talker) => talker.name.toLowerCase().includes(q.toLowerCase()));
+  }
+  if (rate) {
+    filteredTalkers = filteredTalkers.filter((talker) => +talker.talk.rate === +rate);
+  }
+  if (date) {
+    filteredTalkers = filteredTalkers.filter((talker) => talker.talk.watchedAt === date);
+  }
+  return res.status(HTTP_OK_STATUS).json(filteredTalkers);
 };
 
 module.exports = {
@@ -69,3 +78,6 @@ module.exports = {
   deleteTalkerById,
   searchTalkerByName,
 };
+
+// if (rate) filterRes = filterRes.filter((each) => each.talk.rate === rate);
+// if (date) filterRes = filterRes.filter((each) => each.talk.date === date);

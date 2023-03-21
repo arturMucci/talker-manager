@@ -16,6 +16,8 @@ const {
   validateTalk,
   validateWatchedAt,
   validateRate,
+  validateSearchRate,
+  validateSearchDate,
 } = require('../middlewares/validation/index');
 
 const router = Router();
@@ -35,6 +37,8 @@ router.post(
 
 router.get('/search',
   validateAuth,
+  validateSearchRate,
+  validateSearchDate,
   searchTalkerByName);
 
 router.put(
