@@ -5,13 +5,13 @@ const message = {
   rateNotValid: { message: 'O campo "rate" deve ser um número inteiro entre 1 e 5' },
 };
 
-function validateRate(data, req, res, next) {
+function validateRate(req, res, next) {
   const { talk: { rate } } = req.body;
   if (rate === undefined) return res.status(HTTP_BADREQUEST_STATUS).json(message.notRate);
   if (rate < 1 || rate > 5 || !Number.isInteger(rate)) {
     return res.status(HTTP_BADREQUEST_STATUS).json(message.rateNotValid);
   }
-  return next(data.filter((each) => each.talk.rate === rate));
+  return next();
 }
 
 module.exports = validateRate;

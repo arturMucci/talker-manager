@@ -6,7 +6,7 @@ const {
   addNewTalker,
   editTalkerById,
   deleteTalkerById,
-  searchTalkerByQuery,
+  searchTalkerByName,
 } = require('../controller/talkerController');
 
 const {
@@ -20,10 +20,7 @@ const {
 
 const router = Router();
 
-router.get(
-  '/',
-  allTalkers,
-);
+router.get('/', allTalkers);
 
 router.post(
   '/',
@@ -34,12 +31,11 @@ router.post(
   validateWatchedAt,
   validateRate,
   addNewTalker,
-);
+  );
 
 router.get('/search',
   validateAuth,
-  validateRate,
-  searchTalkerByQuery);
+  searchTalkerByName);
 
 router.put(
   '/:id',
@@ -50,7 +46,7 @@ router.put(
   validateWatchedAt,
   validateRate,
   editTalkerById,
-);
+  );
 
 router.delete(
   '/:id',
@@ -58,9 +54,6 @@ router.delete(
   deleteTalkerById,
 );
 
-router.get(
-  '/:id',
-  talkerById,
-);
+router.get('/:id', talkerById);
 
 module.exports = router;
