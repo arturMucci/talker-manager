@@ -58,7 +58,7 @@ const searchTalkerByName = async (req, res) => {
   const { q } = req.query;
   const data = await getAllTalkers();
   const filteredTalkers = data.filter((talker) => talker.name.includes(q));
-  return res.status(200).json(filteredTalkers);
+  return res.status(HTTP_OK_STATUS).json(filteredTalkers);
 };
 
 module.exports = {
